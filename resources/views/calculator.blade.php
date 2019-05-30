@@ -11,6 +11,7 @@
     <title>{{env("APP_NAME")}}</title>
 
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="/assets/css/main.css" rel="stylesheet">
 
@@ -33,7 +34,7 @@
                 <div class="card">
                     <div class="card-body calculator" vue-data="calculator">
                         <div class="row material" v-for="i in component">
-                            <div class="col-6">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <select class="form-control" name="material" data-live-search="true" v-on:change="change_component(event)">
                                         <option value="0" selected hidden>Select Material</option>
@@ -41,19 +42,29 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="number" name="qty" class="form-control" placeholder="Quantity" v-on:keyup="change_component(event)">
+                                    <input type="number" name="qty" min="0" class="form-control" placeholder="Quantity" v-on:keyup="change_component(event)">
                                     <input type="hidden" name="total" value="0">
                                     <input type="hidden" name="add" value="0">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer text-center" vue-data="total">
-                        Price : IDR @{{total.toLocaleString()}} / kg
+                    <div class="card-footer" vue-data="total">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4">
+                                    Qty : @{{total_quantity}}
+                                </div>
+                                <div class="col-8 text-right">
+                                    Price : IDR @{{total.toLocaleString()}} / kg
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <button class="btn btn-secondary reset float-right" v-on:click="reset()"><i class="fa fa-repeat"></i></button>
             </div>
         </div>
     </div>

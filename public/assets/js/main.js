@@ -4,6 +4,7 @@ var app = new Vue({
         data: "asd",
         materials: null,
         total: 0,
+        total_quantity: 0,
         component: 1
     },
     methods: {
@@ -33,6 +34,13 @@ var app = new Vue({
                 app.total += parseFloat(val);
             });
         },
+        refresh_total_quantity: function() {
+            app.total_quantity = 0;
+            $("input[name=qty]").each(function() {
+                var val = $(this).val();
+                app.total_quantity += val == "" ? 0 : parseFloat(val);
+            });
+        },
         change_component: function(event) {
             var parent = $(event.target).parents(".row:first");
             if (event.target.localName == "input") {
@@ -46,6 +54,7 @@ var app = new Vue({
             parent.find("input[name=total]").val((valor * qty) / 100);
             parent.find("input[name=add]").val(1);
             app.refresh_total();
+            app.refresh_total_quantity();
             app.add_component();
             $("select").selectpicker("refresh");
         },
@@ -61,6 +70,18 @@ var app = new Vue({
             if (empty) {
                 app.component++;
             }
+        },
+        reset: function() {
+            $("[vue-data=calculator]").slideUp("slow", function() {
+                app.component = 0;
+                $("[vue-data=total]").slideUp("slow", function() {
+                    app.total = app.total_quantity = 0;
+                    app.component = 1;
+                    $("[vue-data=total]").slideDown("slow", function() {
+                        $("[vue-data=calculator]").slideDown("slow");
+                    });
+                });
+            });
         }
     }
 });

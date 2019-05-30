@@ -93,3 +93,12 @@ body {
     background-color: #fff;
     border-color: #ced4da;
 }
+.reset {
+    background: #fff !important;
+    color: #212529;
+    margin: 5px 0;
+}
+.reset:hover {
+    background: #f7f7f7 !important;
+    color: #212529;
+}
