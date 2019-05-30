@@ -20,7 +20,7 @@ class MaterialController extends Controller
     {
         try {
             $get = $this->materialService->get($request->all());
-            return $get;
+            return $this->sendSuccessResponse("material datas", $get);
         } catch (\Throwable $e) {
             return $this->sendErrorResponse("failed to get material datas", ["error" => "something error"]);
         }

@@ -12,7 +12,7 @@ var app = new Vue({
                 type: "get",
                 url: "/material/data",
                 success: function(response) {
-                    app.materials = response;
+                    app.materials = response.data;
                     $("select").selectpicker("refresh");
                     $("#preloader").fadeOut("slow", function() {
                         $("[vue-data=app]").fadeIn("slow");
