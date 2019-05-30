@@ -11,6 +11,11 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+$router->get('/', "CalculatorController@index");
+
+$router->group(["prefix" => "material"], function () use ($router) {
+    $router->get("data", "MaterialController@data");
+    $router->post("create", "MaterialController@create");
+    $router->patch("update", "MaterialController@update");
+    $router->delete("delete", "MaterialController@delete");
 });
