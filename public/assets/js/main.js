@@ -14,9 +14,10 @@ var app = new Vue({
                 url: "/material/data",
                 success: function(response) {
                     app.materials = response.data;
-                    $("select").selectpicker("refresh");
+                    app.refresh_select();
                     $("#preloader").fadeOut("slow", function() {
                         $("[vue-data=app]").fadeIn("slow");
+                        $("[vue-data=reset]").slideDown("slow");
                         $("[vue-data=calculator]").slideDown(
                             "slow",
                             function() {
@@ -56,7 +57,12 @@ var app = new Vue({
             app.refresh_total();
             app.refresh_total_quantity();
             app.add_component();
-            $("select").selectpicker("refresh");
+            app.refresh_select();
+        },
+        refresh_select: function() {
+            setTimeout(() => {
+                $("select").selectpicker("refresh");
+            }, 0);
         },
         add_component: function() {
             var empty = true;
@@ -77,6 +83,7 @@ var app = new Vue({
                 $("[vue-data=total]").slideUp("slow", function() {
                     app.total = app.total_quantity = 0;
                     app.component = 1;
+                    app.refresh_select();
                     $("[vue-data=total]").slideDown("slow", function() {
                         $("[vue-data=calculator]").slideDown("slow");
                     });

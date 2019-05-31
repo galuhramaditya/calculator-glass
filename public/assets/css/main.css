@@ -97,8 +97,12 @@ body {
     background: #fff !important;
     color: #212529;
     margin: 5px 0;
+    cursor: pointer;
 }
 .reset:hover {
     background: #f7f7f7 !important;
     color: #212529;
+}
+.dropdown-menu[role="combobox"] {
+    width: 100%;
 }

@@ -34,15 +34,15 @@
                 <div class="card">
                     <div class="card-body calculator" vue-data="calculator">
                         <div class="row material" v-for="i in component">
-                            <div class="col-sm-6">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <select class="form-control" name="material" data-live-search="true" v-on:change="change_component(event)">
                                         <option value="0" selected hidden>Select Material</option>
-                                        <option v-for="material in materials" :value="material.valor_per_ton">@{{_.toUpper(material.name)}}</option>
+                                        <option v-for="material in _.sortBy(materials, 'name')" :value="material.valor_per_ton">@{{_.toUpper(material.name)}}</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-6">
                                 <div class="form-group">
                                     <input type="number" name="qty" min="0" class="form-control" placeholder="Quantity" v-on:keyup="change_component(event)">
                                     <input type="hidden" name="total" value="0">
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-secondary reset float-right" v-on:click="reset()"><i class="fa fa-repeat"></i></button>
+                <a class="btn btn-secondary reset float-right" v-on:click="reset()" vue-data="reset"><i class="fa fa-repeat"></i></a>
             </div>
         </div>
     </div>
